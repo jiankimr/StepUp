@@ -67,13 +67,20 @@ def mission_list(request):
 
 @login_required
 def change_mission(request, mission_id):
+    user = request.user
+    today = timezone.now().date()
+    user_missions = UserMission.objects.filter(user=user, date=today)
+    
+    # 모든 user_missions의 mission id들을 리스트로 가져옴
+    exclude_ids = user_missions.values_list('mission__id', flat=True)
+
     user_mission = get_object_or_404(UserMission, id=mission_id)
 
     if user_mission.mission.type == 'main':
-        missions = Mission.objects.filter(type='main').exclude(id=user_mission.mission.id)
+        missions = Mission.objects.filter(type='main').exclude(id__in=exclude_ids)
         mission_changed = random.choice(missions)
     else:
-        missions = Mission.objects.filter(type='sub').exclude(id=user_mission.mission.id)
+        missions = Mission.objects.filter(type='sub').exclude(id__in=exclude_ids)
         mission_changed = random.choice(missions)
     
     user_mission.mission = mission_changed
@@ -81,19 +88,29 @@ def change_mission(request, mission_id):
     
     return redirect('mission_list')
 
+
 @login_required
 def change_mission_js(request, mission_id):
     if request.method == "GET":
+        user = request.user
+        today = timezone.now().date()
+        user_missions=UserMission.objects.filter(user=user, date=today)
+        # 모든 user_missions의 mission id들을 리스트로 가져옴
+        exclude_ids = user_missions.values_list('mission__id', flat=True)
+
         user_mission = get_object_or_404(UserMission, id=mission_id)
+
         if user_mission.mission.type == 'main':
-            missions = Mission.objects.filter(type='main').exclude(id=user_mission.mission.id)
+            missions = Mission.objects.filter(type='main').exclude(id__in=exclude_ids)
             mission_changed = random.choice(missions)
+
         else:
-            missions = Mission.objects.filter(type='sub').exclude(id=user_mission.mission.id)
+            #missions = Mission.objects.filter(type='sub').exclude(id=user_mission.mission.id)
+            missions = Mission.objects.filter(type='sub').exclude(id__in=exclude_ids)
             mission_changed = random.choice(missions)
         
         user_mission.mission = mission_changed
         user_mission.save()
         return JsonResponse({'mission-name': user_mission.mission.name, 'mission-type': user_mission.mission.type,
-                             'mission-description': user_mission.mission.description}, status=200)
+                            'mission-description': user_mission.mission.description}, status=200)
     return JsonResponse({'error': 'Invalid method'}, status=400)

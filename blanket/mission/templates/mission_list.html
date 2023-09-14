@@ -61,7 +61,7 @@
                         <!-- 메인 미션에 대한 활동 설명 -->
                         <p class="mission-explanation">{{ main_mission.mission.description }}</p>
                     </div>
-                    <button class="main-shuffle"></button>
+                    <button class="main-shuffle" onclick="location.href='{% url 'change_mission' main_mission.id %}';" ></button>
                 </button>
                 <!-- 감정기록 버튼 클릭 시 이동-->
                 <button class="Btn-record" onclick="location.href='{% url 'record' %}';" disabled>
@@ -76,7 +76,7 @@
                     data-completed="{{ sub_mission.completed|yesno:'true,false' }}" disabled>
                         <p class="sub-content">{{ sub_mission.mission.name }}</p>
                     </button>
-                    <button class="sub-shuffle" ></button>
+                    <button class="sub-shuffle"></button>
                 </div>
                 {% endfor %}
 
