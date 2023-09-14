@@ -111,6 +111,6 @@ def change_mission_js(request, mission_id):
         
         user_mission.mission = mission_changed
         user_mission.save()
-        return JsonResponse({'mission-name': user_mission.mission.name, 'mission-type': user_mission.mission.type,
-                            'mission-description': user_mission.mission.description}, status=200)
+        return JsonResponse({'name': user_mission.mission.name, 'type': user_mission.mission.type,
+                            'description': user_mission.mission.description}, status=200)
     return JsonResponse({'error': 'Invalid method'}, status=400)

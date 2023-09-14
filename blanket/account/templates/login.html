@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Login</title>
 	</head>
 	<body>
@@ -12,18 +14,20 @@
 					<img src="/static/welcome!.png"/>
 				</h1>
 				<div class="loginForm">
-					<div class="group">
-						<input class="idinput" name="username" placeholder="아이디" type="text" />
-						<div class="under">
-							<div class="circle"></div>
-							<hr>
+					<div class="login-wrapper">
+						<div class="group">
+							<input class="idinput" name="username" placeholder="아이디" type="text" />
+							<!-- <div class="under">
+								<div class="circle"></div>
+								<hr>
+							</div> -->
 						</div>
-					</div>
-					<div class="group">
-						<input class="pwinput" name="password"  placeholder="비밀번호" type="password" />
-						<div class="under">
-							<div class="circle"></div>
-							<hr>
+						<div class="group">
+							<input class="pwinput" name="password"  placeholder="비밀번호" type="password" />
+							<!-- <div class="under">
+								<div class="circle"></div>
+								<hr>
+							</div> -->
 						</div>
 					</div>
 					<button type="submit" value="로그인">로그인</button>
@@ -73,25 +77,38 @@
 		background-color: #FFFDEE;
 		opacity: 0.65;
 		width: 390px;
-		height: 60%;
+		height: 534px;
 		border-radius: 30px 30px 0px 0px;
-		padding: 50px 0px 50px 0px;
-		position: relative;
-		top: 844px;
+		padding: 50px 0px;
+		position: absolute;
+		top: 210px;
 		display: flex;
-		justify-content: space-around;
+		justify-content: space-evenly;
 		align-items: center;
 		flex-direction: column;
 	}
+
+	.login-wrapper{
+		width: 100%;
+		height: 150px;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 	.group {
 		width: 280px;
+		margin: 10px;
 	}
 	input {
 		font-size: 100%;
 		width: 100%;
+		height: 50px;
 		border-color: transparent;
-		background-color: transparent;
+		background-color: #fff5c1;
 		text-align: center;
+		border-radius: 10px;
 	}
 	input:focus {
 		outline: none;
@@ -132,25 +149,23 @@
 		opacity: 0.8;
 		border: solid 1px #79736E;
 		border-radius: 10px;
-		width: 150px;
+		width: 280px;
 		height: 50px;
 		font-size: 15px;
 		transition: 0.2s;
 	}
 	button:hover {
 		background-color: #e6e1dd;
-		opacity: 0.8;
-		border: line #79736E;
-		border-radius: 10px;
-		width: 150px;
-		height: 50px;
-		font-size: 15px;
 		transition: 0.2s;
 	}
 	.goregister {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+
+	.goregister a{
+		color: black;
 	}
 </style>
 
